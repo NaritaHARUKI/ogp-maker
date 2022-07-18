@@ -1,0 +1,63 @@
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+<script src="ogpmaker.js" defer></script>
+<link rel="stylesheet" href="ogp.css">
+
+<h2>OGP設定</h2>
+
+<table class="acms-admin-table-admin-edit">
+	<tr>
+		<th>OGP画像</th>
+		<td class="js-img_resize_cf">
+			<!-- BEGIN_IF [{ogp-image@path}/nem] -->
+			<img src="%{ARCHIVES_DIR}{ogp-image@path}" class="acms-admin-img-responsive js-img_resize_preview"
+				style="width:1280px" alt="{ogp-image@alt}" />
+			<input type="hidden" name="ogp-image@old" value="{ogp-image@path}" />
+			<div class="acms-admin-form-checkbox">
+				<input type="checkbox" name="ogp-image@edit" value="delete" id="input-checkbox-ogp-image@edit" />
+				<label for="input-checkbox-ogp-image@edit">
+					<i class="acms-admin-ico-checkbox"></i>削除</label>
+			</div>
+			<!-- ELSE -->
+			<img src="%{ARCHIVES_DIR}{ogp-image@path}" class="acms-admin-img-responsive js-img_resize_preview"
+				style="width:1280px;display:none" />
+			<!-- END_IF -->
+			<input type="file" name="ogp-image" size="20" class="js-img_resize_input" />
+			<br />
+			<input type="button" value="OGP画像を作る" id="createOgp">
+			<input type="hidden" name="field[]" value="ogp-image" />
+			<input type="hidden" name="ogp-image:extension" value="image" />
+			<input type="hidden" name="ogp-image@size" value="1280" />
+			<input type="hidden" name="ogp-image@filename" value="" />
+		</td>
+	</tr>
+</table>
+
+<h2>OGP画像元</h2>
+
+<!-- BEGIN_MODULE Entry_Summary id="ogp-image" -->
+<!-- BEGIN notFound -->
+<!-- END notFound -->
+<!-- BEGIN unit:loop -->
+<!-- BEGIN entry:loop -->
+<!-- BEGIN image:veil -->
+<!--<img src="%{ROOT_DIR}{path}" alt="{alt}" class="acms-img-responsive">-->
+<div id="main"></div>
+<div id="container" class="acms-img-responsive">
+	<h5>{title}</h5>
+	<!-- END image:veil -->
+	<img class="getBackImg" src="%{ROOT_DIR}{path}[resizeImg(1200,630)]">
+	<!-- END image:veil -->
+	<!-- BEGIN noimage -->
+	<img src="/images/default/noimage.gif" alt="" class="getBackImg">
+	<!-- END noimage -->
+	<p class="backColor"></p>
+	<!-- BEGIN userField -->
+	<img class="getUserIcon" src="%{ARCHIVES_DIR}{fieldUserIcon}">
+	<p class="getUserName">{fieldUserName}</p>
+	<!-- END userField -->
+	<p class="getBlogName">%{BLOG_NAME}</p>
+</div>
+<!-- END entry:loop -->
+<!-- END unit:loop -->
+
+<!-- END_MODULE Entry_Summary -->
